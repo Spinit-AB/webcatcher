@@ -24,8 +24,7 @@ namespace WebCatcher
             var defaultForegroundColor = Console.ForegroundColor;
             Console.WriteLine("---------------------------------------------------------------");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(request.Method);
-            Console.Write(" {0}\r\n", request.Uri.AbsoluteUri);
+            Console.WriteLine("{0} {1}", request.Method, request.Uri.AbsoluteUri);
             Console.ForegroundColor = defaultForegroundColor;
             Console.WriteLine("---------------------------------------------------------------");
             using (var reader = new StreamReader(request.Body))
