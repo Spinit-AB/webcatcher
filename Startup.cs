@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using Microsoft.Owin;
 using Owin;
 
@@ -13,7 +15,7 @@ namespace WebCatcher
                 WriteRequest(context.Request);
                 context.Response.ContentType = "text/plain";
                 context.Response.StatusCode = 200;
-                return context.Response.WriteAsync("Web Catcher says Thank you!");
+                return context.Response.WriteAsync("Web Catcher says: Thank you!");
             });
         }
 
@@ -25,6 +27,13 @@ namespace WebCatcher
             Console.Write(request.Method);
             Console.Write(" {0}\r\n", request.Uri.AbsoluteUri);
             Console.ForegroundColor = defaultForegroundColor;
+            Console.WriteLine("---------------------------------------------------------------");
+            using (var reader = new StreamReader(request.Body))
+            {
+                Console.WriteLine(reader.ReadToEnd());
+            }
+
+            Console.WriteLine("---------------------------------------------------------------");
         }
     }
 }
