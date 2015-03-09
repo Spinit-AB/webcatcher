@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using Microsoft.Owin;
+using Newtonsoft.Json;
 using Owin;
 
 namespace WebCatcher
@@ -29,10 +30,22 @@ namespace WebCatcher
             Console.WriteLine("---------------------------------------------------------------");
             using (var reader = new StreamReader(request.Body))
             {
-                Console.WriteLine(reader.ReadToEnd());
+                var content = reader.ReadToEnd();
+                var formattedContent = FormatBody(request, content);
+                Console.WriteLine(formattedContent);
             }
 
             Console.WriteLine("---------------------------------------------------------------");
+        }
+
+        private static string FormatBody(IOwinRequest request, string content)
+        {
+            if (request.ContentType.Contains("json"))
+            {
+                return JsonConvert.DeserializeObject(content)
+                                  .ToString();
+            }
+            return content;
         }
     }
 }

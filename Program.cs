@@ -13,11 +13,11 @@ namespace WebCatcher
 
             using (WebApp.Start<Startup>(uri))
             {
-                Console.WriteLine("\r\n");
+                Console.WriteLine("==============================================================");
                 Console.WriteLine("Web Catcher Started on port " + port + ". Press any key to exit...");
                 Console.ReadKey();
                 Console.WriteLine("Stopping Web Catcher");
-                Console.WriteLine("\r\n");
+                Console.WriteLine("==============================================================");
             }
         }
     }
